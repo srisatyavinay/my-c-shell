@@ -6,7 +6,7 @@ void tokenise(char* command)
     int num_args = 0;
     // printf( "|%s|\n", command );
 
-    argtoken = strtok(command, " ");
+    argtoken = strtok(command, " \t\v");
     argument[num_args] = argtoken;
     // printf( "|%s|\n", argument[num_args] );
     // return;
@@ -15,7 +15,7 @@ void tokenise(char* command)
     {
         printf( "|%s|\n", argument[num_args] );
         num_args++;
-        argtoken = strtok(NULL, " ");
+        argtoken = strtok(NULL, " \t\v");
         argument[num_args] = argtoken;
     }
     printf("%d\n", num_args);
@@ -32,6 +32,10 @@ void tokenise(char* command)
     {
         // printf("a\n");
         pwd_execution();
+    }
+    if(strcmp(argument[0], "ls") == 0)
+    {
+        ls_execution(argument, num_args);
     }
 }
 

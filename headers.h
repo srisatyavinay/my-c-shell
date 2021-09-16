@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <dirent.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define MAX_LENGTH 1024
 
@@ -13,6 +17,7 @@ void tokenise(char* command);
 void echo_execution(char** arg, int num);
 void cd_execution(char** arg, int num);
 void pwd_execution();
+void ls_execution(char** arg, int num);
 
 
 
