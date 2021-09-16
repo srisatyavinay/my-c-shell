@@ -17,6 +17,7 @@ void pwd_execution();
 
 
 char invokedir[1024];
+char prevdir[1024];
 // extern char* workingdir;
 char* comm[64];
 char* argument[64];

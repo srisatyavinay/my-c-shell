@@ -26,9 +26,14 @@ void cd_execution(char** arg, int num)
         printf("4\n");
         return;
     }
-    else if(arg[1][0] == '~')
+    else if(strcmp(arg[1], "-") == 0)
     {
         printf("5\n");
+        chdir(prevdir);
+    }
+    else if(arg[1][0] == '~')
+    {
+        printf("6\n");
         int k = 1;
 
         char newpath[MAX_LENGTH];
@@ -47,9 +52,10 @@ void cd_execution(char** arg, int num)
     }
     else
     {
-        printf("6\n");
+        printf("7\n");
         chdir(arg[1]);
     }
+    strcpy(prevdir, workingdir);
     getcwd(workingdir, MAX_LENGTH);
     printf("After : %s\n", workingdir);
 }
