@@ -4,7 +4,7 @@ void ls_execution(char **arg, int num)
 {
     int lsa = 0;
     int lsl = 0;
-    char path[32][1024];
+    char path[64][1024];
     char respath[1024];
     int num_path = 0;
     for (int i = 1; i < num; i++)
