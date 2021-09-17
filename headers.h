@@ -6,6 +6,11 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/dir.h>
+#include <pwd.h> 
+#include <grp.h> 
+#include <time.h> 
+#include <locale.h> 
 
 #define MAX_LENGTH 1024
 

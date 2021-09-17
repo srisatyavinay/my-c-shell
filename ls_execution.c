@@ -100,7 +100,137 @@ void ls_execution(char **arg, int num)
         }
         if (lsa == 0 && lsl == 1)
         {
-            
+            printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+            // return;
+            DIR *mydir;
+            struct stat reqstat;
+            struct dirent *myfile;
+            strcpy(respath, path[0]);
+            char buf[1024];
+            if(path[0][0] == '~')
+            {
+                int h = 1;
+                strcpy(respath, invokedir);
+                strcat(respath, "/");
+                int dist = strlen(respath);
+                for(h = 1; h < strlen(path[0]); h++)
+                {
+                    respath[dist + h - 1] = path[0][h];
+                }
+                respath[dist + h - 1] = '\0';
+                printf("|%s|\n", respath);
+                // return;
+            }
+            mydir = opendir(respath);
+            if(mydir == NULL)
+            {
+
+            }   
+            else
+            {
+                while ((myfile = readdir(mydir)) != NULL)
+                {
+                    struct tm filetime;
+                    char dateof[100];
+                    strcpy(buf, respath);
+                    strcat(buf, "/");
+                    strcat(buf, myfile->d_name);
+                    // sprintf(buf, "%s/%s", respath, myfile->d_name);
+                    stat(buf, &reqstat);
+                    // printf("%zu", reqstat.st_size);
+                    char permissions[11];
+                    if( reqstat.st_mode & S_ISDIR(reqstat.st_mode) )
+                    {
+                        permissions[0] = 'd';
+                    }
+                    else
+                    {
+                        permissions[0] = '-';
+                    }
+                    if( reqstat.st_mode & S_IRUSR )
+                    {
+                        permissions[1] = 'r';
+                    }
+                    else
+                    {
+                        permissions[1] = '-';
+                    }
+                    if( reqstat.st_mode & S_IWUSR )
+                    {
+                        permissions[2] = 'w';
+                    }
+                    else
+                    {
+                        permissions[2] = '-';
+                    }
+                    if( reqstat.st_mode & S_IXUSR )
+                    {
+                        permissions[3] = 'x';
+                    }
+                    else
+                    {
+                        permissions[3] = '-';
+                    }
+                    if( reqstat.st_mode & S_IRGRP )
+                    {
+                        permissions[4] = 'r';
+                    }
+                    else
+                    {
+                        permissions[4] = '-';
+                    }
+                    if( reqstat.st_mode & S_IWGRP )
+                    {
+                        permissions[5] = 'w';
+                    }
+                    else
+                    {
+                        permissions[5] = '-';
+                    }
+                    if( reqstat.st_mode & S_IXGRP )
+                    {
+                        permissions[6] = 'x';
+                    }
+                    else
+                    {
+                        permissions[6] = '-';
+                    }
+                    if( reqstat.st_mode & S_IROTH )
+                    {
+                        permissions[7] = 'r';
+                    }
+                    else
+                    {
+                        permissions[7] = '-';
+                    }
+                    if( reqstat.st_mode & S_IWOTH )
+                    {
+                        permissions[8] = 'w';
+                    }
+                    else
+                    {
+                        permissions[8] = '-';
+                    }
+                    if( reqstat.st_mode & S_IXOTH )
+                    {
+                        permissions[9] = 'x';
+                    }
+                    else
+                    {
+                        permissions[9] = '-';
+                    }
+                    permissions[10] = '\0';
+                    struct passwd *passown = getpwuid(reqstat.st_uid);
+                    struct group  *grfile = getgrgid(reqstat.st_gid);
+                    localtime_r(&reqstat.st_mtime, &filetime);
+                    strftime(dateof, sizeof(dateof), "%b %d %Y %H:%M", &filetime);
+
+                    if(myfile->d_name[0] != '.')
+                    {
+                        printf("%s\t%ld\t%s\t%s\t%ld\t%s\t%s\n",permissions, reqstat.st_nlink, passown->pw_name, grfile->gr_name, reqstat.st_size, dateof, myfile->d_name);
+                    }
+                }
+            }         
         }
         if (lsa == 1 && lsl == 0)
         {
@@ -159,6 +289,7 @@ void ls_execution(char **arg, int num)
         }
         if (lsa == 1 && lsl == 1)
         {
+
         }
     }
 }
