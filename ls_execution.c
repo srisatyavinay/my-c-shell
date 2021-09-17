@@ -124,10 +124,130 @@ void ls_execution(char **arg, int num)
             mydir = opendir(respath);
             if(mydir == NULL)
             {
-
+                strcpy(buf, respath);
+                int x = stat(buf, &reqstat);
+                if(x == 0)
+                {
+                    struct tm filetime;
+                    char dateof[100];
+                    // printf("%s\n", respath);
+                    char permissions[11];
+                    if( reqstat.st_mode & S_ISDIR(reqstat.st_mode) )
+                    {
+                        permissions[0] = 'd';
+                    }
+                    else
+                    {
+                        permissions[0] = '-';
+                    }
+                    if( reqstat.st_mode & S_IRUSR )
+                    {
+                        permissions[1] = 'r';
+                    }
+                    else
+                    {
+                        permissions[1] = '-';
+                    }
+                    if( reqstat.st_mode & S_IWUSR )
+                    {
+                        permissions[2] = 'w';
+                    }
+                    else
+                    {
+                        permissions[2] = '-';
+                    }
+                    if( reqstat.st_mode & S_IXUSR )
+                    {
+                        permissions[3] = 'x';
+                    }
+                    else
+                    {
+                        permissions[3] = '-';
+                    }
+                    if( reqstat.st_mode & S_IRGRP )
+                    {
+                        permissions[4] = 'r';
+                    }
+                    else
+                    {
+                        permissions[4] = '-';
+                    }
+                    if( reqstat.st_mode & S_IWGRP )
+                    {
+                        permissions[5] = 'w';
+                    }
+                    else
+                    {
+                        permissions[5] = '-';
+                    }
+                    if( reqstat.st_mode & S_IXGRP )
+                    {
+                        permissions[6] = 'x';
+                    }
+                    else
+                    {
+                        permissions[6] = '-';
+                    }
+                    if( reqstat.st_mode & S_IROTH )
+                    {
+                        permissions[7] = 'r';
+                    }
+                    else
+                    {
+                        permissions[7] = '-';
+                    }
+                    if( reqstat.st_mode & S_IWOTH )
+                    {
+                        permissions[8] = 'w';
+                    }
+                    else
+                    {
+                        permissions[8] = '-';
+                    }
+                    if( reqstat.st_mode & S_IXOTH )
+                    {
+                        permissions[9] = 'x';
+                    }
+                    else
+                    {
+                        permissions[9] = '-';
+                    }
+                    permissions[10] = '\0';
+                    struct passwd *passown = getpwuid(reqstat.st_uid);
+                    struct group  *grfile = getgrgid(reqstat.st_gid);
+                    localtime_r(&reqstat.st_mtime, &filetime);
+                    strftime(dateof, sizeof(dateof), "%b %d %Y %H:%M", &filetime);
+                    printf("%s\t%ld\t%s\t%s\t%ld\t\t%s\t%s\n",permissions, reqstat.st_nlink, passown->pw_name, grfile->gr_name, reqstat.st_size, dateof, respath);
+                }
+                else
+                {
+                    perror("Error");
+                }
             }   
             else
             {
+                DIR *totdir;
+                struct stat totreqstat;
+                struct dirent *totmyfile;
+                char totbuf[1024];
+                char totrespath[1024];
+                strcpy(totrespath, respath);
+                long long int totbytes = 0;
+                totdir = opendir(totrespath);
+                while((totmyfile = readdir(totdir)) != NULL)
+                {
+                    // return;
+                    strcpy(totbuf, totrespath);
+                    strcat(totbuf, "/");
+                    strcat(totbuf, totmyfile->d_name);
+                    stat(totbuf, &totreqstat);
+                    if(totmyfile->d_name[0] != '.')
+                    {
+                        totbytes = totbytes + totreqstat.st_blocks;
+                    }
+                }
+                totbytes = totbytes/2;
+                printf("total %lld\n", totbytes);
                 while ((myfile = readdir(mydir)) != NULL)
                 {
                     struct tm filetime;
@@ -227,7 +347,7 @@ void ls_execution(char **arg, int num)
 
                     if(myfile->d_name[0] != '.')
                     {
-                        printf("%s\t%ld\t%s\t%s\t%ld\t%s\t%s\n",permissions, reqstat.st_nlink, passown->pw_name, grfile->gr_name, reqstat.st_size, dateof, myfile->d_name);
+                        printf("%s\t%ld\t%s\t%s\t%ld\t\t%s\t%s\n",permissions, reqstat.st_nlink, passown->pw_name, grfile->gr_name, reqstat.st_size, dateof, myfile->d_name);
                     }
                 }
             }         
