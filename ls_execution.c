@@ -28,11 +28,11 @@ void ls_execution(char **arg, int num)
             num_path++;
         }
     }
-    printf("%d %d \n", lsa, lsl);
-    for (int n = 0; n < num_path; n++)
-    {
-        printf("|%s|\n", path[n]);
-    }
+    // printf("%d %d \n", lsa, lsl);
+    // for (int n = 0; n < num_path; n++)
+    // {
+    //     printf("|%s|\n", path[n]);
+    // }
 
     if (num_path == 0)
     {
@@ -40,12 +40,12 @@ void ls_execution(char **arg, int num)
         // return;
         strcpy(path[0], ".");
     }
-    printf("-----------------------------------------\n");
+    // printf("-----------------------------------------\n");
     if (num_path < 2)
     {
         if (lsa == 0 && lsl == 0)
         {
-            printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
             // return;
             DIR *mydir;
             struct stat reqstat;
@@ -63,7 +63,7 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[0][h];
                 }
                 respath[dist + h - 1] = '\0';
-                printf("|%s|\n", respath);
+                // printf("|%s|\n", respath);
                 // return;
             }
             mydir = opendir(respath);
@@ -100,7 +100,7 @@ void ls_execution(char **arg, int num)
         }
         if (lsa == 0 && lsl == 1)
         {
-            printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
             // return;
             DIR *mydir;
             struct stat reqstat;
@@ -118,7 +118,7 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[0][h];
                 }
                 respath[dist + h - 1] = '\0';
-                printf("|%s|\n", respath);
+                // printf("|%s|\n", respath);
                 // return;
             }
             mydir = opendir(respath);
@@ -354,7 +354,7 @@ void ls_execution(char **arg, int num)
         }
         if (lsa == 1 && lsl == 0)
         {
-            printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
             // return;
             DIR *mydir;
             struct stat reqstat;
@@ -372,7 +372,7 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[0][h];
                 }
                 respath[dist + h - 1] = '\0';
-                printf("|%s|\n", respath);
+                // printf("|%s|\n", respath);
                 // return;
             }
             mydir = opendir(respath);
@@ -409,7 +409,7 @@ void ls_execution(char **arg, int num)
         }
         if (lsa == 1 && lsl == 1)
         {
-            printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
             // return;
             DIR *mydir;
             struct stat reqstat;
@@ -427,7 +427,7 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[0][h];
                 }
                 respath[dist + h - 1] = '\0';
-                printf("|%s|\n", respath);
+                // printf("|%s|\n", respath);
                 // return;
             }
             mydir = opendir(respath);
@@ -664,13 +664,13 @@ void ls_execution(char **arg, int num)
     }
     else
     {
-        printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-        printf("\n\n%d %d\n\n", lsa, lsl);
+        // printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+        // printf("\n\n%d %d\n\n", lsa, lsl);
         for (int num_dirpath = 0; num_dirpath < num_path; num_dirpath++)
         {
             if (lsa == 0 && lsl == 0)
             {
-                printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+                // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
                 // return;
                 DIR *mydir;
                 struct stat reqstat;
@@ -688,7 +688,7 @@ void ls_execution(char **arg, int num)
                         respath[dist + h - 1] = path[num_dirpath][h];
                     }
                     respath[dist + h - 1] = '\0';
-                    printf("|%s|\n", respath);
+                    // printf("|%s|\n", respath);
                     // return;
                 }
                 mydir = opendir(respath);
@@ -727,7 +727,7 @@ void ls_execution(char **arg, int num)
             if (lsa == 0 && lsl == 1)
             {
                 // return;
-                printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+                // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
                 // return;
                 DIR *mydir;
                 struct stat reqstat;
@@ -736,7 +736,7 @@ void ls_execution(char **arg, int num)
                 char buf[1024];
                 if (path[num_dirpath][0] == '~')
                 {
-                    printf("yyyyyyyyyyyyyyyyyyyyy\n");
+                    // printf("yyyyyyyyyyyyyyyyyyyyy\n");
                     int h = 1;
                     strcpy(respath, invokedir);
                     strcat(respath, "/");
@@ -746,7 +746,7 @@ void ls_execution(char **arg, int num)
                         respath[dist + h - 1] = path[num_dirpath][h];
                     }
                     respath[dist + h - 1] = '\0';
-                    printf("|%s|\n", respath);
+                    // printf("|%s|\n", respath);
                     // return;
                 }
                 mydir = opendir(respath);
@@ -984,7 +984,7 @@ void ls_execution(char **arg, int num)
             }
             if (lsa == 1 && lsl == 0)
             {
-                printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+                // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
                 // return;
                 DIR *mydir;
                 struct stat reqstat;
@@ -1002,7 +1002,7 @@ void ls_execution(char **arg, int num)
                         respath[dist + h - 1] = path[num_dirpath][h];
                     }
                     respath[dist + h - 1] = '\0';
-                    printf("|%s|\n", respath);
+                    // printf("|%s|\n", respath);
                     // return;
                 }
                 mydir = opendir(respath);
@@ -1041,7 +1041,7 @@ void ls_execution(char **arg, int num)
             if (lsa == 1 && lsl == 1)
             {
                 // return;
-                printf("bbaaaaaaaaaaaaaaaaaaaa\n");
+                // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
                 // return;
                 DIR *mydir;
                 struct stat reqstat;
@@ -1050,7 +1050,7 @@ void ls_execution(char **arg, int num)
                 char buf[1024];
                 if (path[num_dirpath][0] == '~')
                 {
-                    printf("yyyyyyyyyyyyyyyyyyyyy\n");
+                    // printf("yyyyyyyyyyyyyyyyyyyyy\n");
                     int h = 1;
                     strcpy(respath, invokedir);
                     strcat(respath, "/");
@@ -1060,7 +1060,7 @@ void ls_execution(char **arg, int num)
                         respath[dist + h - 1] = path[num_dirpath][h];
                     }
                     respath[dist + h - 1] = '\0';
-                    printf("|%s|\n", respath);
+                    // printf("|%s|\n", respath);
                     // return;
                 }
                 mydir = opendir(respath);
