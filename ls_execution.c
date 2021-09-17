@@ -662,4 +662,8 @@ void ls_execution(char **arg, int num)
             }
         }
     }
+    else
+    {
+        
+    }
 }
