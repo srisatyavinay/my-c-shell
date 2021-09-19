@@ -7,8 +7,8 @@ This is a working C shell that would mimic a bash shell which supports colon sep
 To start the shell use the following commands
 
 ```bash
-$ make
-$ ./myshell
+make
+./myshell
 ```
 
 ## To stop
@@ -16,7 +16,7 @@ $ ./myshell
 To stop the shell use the following command
 
 ```bash
-$ exit
+exit
 ```
 
 ## Files used
