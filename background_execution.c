@@ -19,19 +19,12 @@ void background_execution(char **arg, int num)
     else if(forkret == 0)
     {
         // printf("%d\n", forkret);
-        if(backproc == 0)
+        if(backproc == 1)
         {
             setpgid(0, 0);
         }
         int ex;
-        // if(strcmp(arg[0], "vi") != 0)
-        // {
-            ex = execvp(arg[0], arg);
-        // }
-        // else
-        // {
-        //     ex = execvp("vi", arg);
-        // }
+        ex = execvp(arg[0], arg);
         if (ex < 0)
         {
             fprintf(stderr, "Error occured during the execution of %s command\n", arg[0]);
@@ -42,21 +35,21 @@ void background_execution(char **arg, int num)
     else
     {
         int val;
-        if(backproc != 0)
+        if(backproc != 1)
         {
-            printf("%d\n", forkret);
             waitpid(forkret, &val, WUNTRACED);
         }
         else
         {
+            printf("%d\n", forkret);
             struct back *newback = malloc(sizeof(struct back));
-            strcpy(newback, arg[0]);
+            strcpy(newback->backname, arg[0]);
             newback->backpid = forkret;
             newback->next = present;
-            if(newback->next != NULL)
-            {
-                first = newback;
-            }
+            // if(newback->next != NULL)
+            // {
+            //     first = newback;
+            // }
             present = newback;
         }
     }

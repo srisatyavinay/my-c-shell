@@ -41,7 +41,6 @@ struct back
     struct back *next;
 };
 
-struct back *first;
 struct back *present;
 
 #endif
