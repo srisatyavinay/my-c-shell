@@ -25,9 +25,9 @@ void cd_execution(char** arg, int num);
 void pwd_execution();
 void ls_execution(char** arg, int num);
 void identify_command(char** arg, int num);
-void history_execution(char **arg, int num);
 void background_execution(char **arg, int num);
 void pinfo_execution(char **arg, int num);
+void exit_execution();
 
 char invokedir[1024];
 char prevdir[1024];

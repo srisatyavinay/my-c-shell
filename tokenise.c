@@ -73,9 +73,13 @@ void identify_command(char** arg, int num)
             identify_command(arg + 2, num - 2);
         }
     }
-    else if(strcmp(arg[0], "history") == 0)
+    // else if(strcmp(arg[0], "history") == 0)
+    // {
+    //     history_execution(arg, num);
+    // }
+    else if(strcmp(arg[0], "exit") == 0)
     {
-        history_execution(arg, num);
+        exit_execution();
     }
     else
     {
