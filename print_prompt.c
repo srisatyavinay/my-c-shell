@@ -32,6 +32,6 @@ void print_prompt()
     }
     else
     {
-        printf("<%s@%s: %s>", username, systemname, workingdir);
+        printf("<%s@%s:%s>", username, systemname, workingdir);
     }
 }

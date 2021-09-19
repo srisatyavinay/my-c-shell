@@ -7,6 +7,7 @@ int main()
     getcwd(invokedir, MAX_LENGTH);
     while(1)
     {
+        check_for_bg_process();
         print_prompt();
 
         char* lineptr = NULL;

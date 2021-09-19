@@ -8,6 +8,7 @@ void background_execution(char **arg, int num)
     if(strcmp(arg[num - 1], "&") == 0)
     {
         backproc = 1;
+        arg[num - 1] = NULL;
         // printf("aaaaaaaaaaaggggggggggggbfjgrgjggew\n");
     }
     int forkret = fork();
@@ -28,7 +29,7 @@ void background_execution(char **arg, int num)
         if (ex < 0)
         {
             fprintf(stderr, "Error occured during the execution of %s command\n", arg[0]);
-            perror("");
+            // perror("");
             exit(1);
         }
     }

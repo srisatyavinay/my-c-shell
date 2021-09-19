@@ -28,6 +28,7 @@ void identify_command(char** arg, int num);
 void background_execution(char **arg, int num);
 void pinfo_execution(char **arg, int num);
 void exit_execution();
+void check_for_bg_process();
 
 char invokedir[1024];
 char prevdir[1024];
@@ -36,8 +37,8 @@ char* argument[64];
 int a;
 struct back
 {
-    char backname[1024];
     int backpid;
+    char backname[1024];
     struct back *next;
 };
 
