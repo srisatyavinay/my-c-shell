@@ -4,11 +4,11 @@ void check_for_bg_process()
 {
     int processid, processstatus;
 
-    for(;;)
+    for (;;)
     {
         int processid = waitpid(-1, &processstatus, WNOHANG | WUNTRACED);
 
-        if(processid <= 0)
+        if (processid <= 0)
         {
             break;
         }
@@ -19,9 +19,9 @@ void check_for_bg_process()
             previous = present;
             curr = present;
 
-            if(present != NULL)
-            {      
-                if(curr != NULL && curr->backpid == processid)
+            if (present != NULL)
+            {
+                if (curr != NULL && curr->backpid == processid)
                 {
                     present = present->next;
                     if (WIFEXITED(processstatus))
@@ -36,12 +36,12 @@ void check_for_bg_process()
                 }
                 else
                 {
-                    while(curr != NULL && curr->backpid != processid)
+                    while (curr != NULL && curr->backpid != processid)
                     {
                         previous = curr;
                         curr = curr->next;
                     }
-                    if(curr != NULL)
+                    if (curr != NULL)
                     {
                         previous->next = curr->next;
                         if (WIFEXITED(processstatus))

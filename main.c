@@ -1,16 +1,15 @@
 #include "headers.h"
 
-
 int main()
 {
     present = NULL;
     getcwd(invokedir, MAX_LENGTH);
-    while(1)
+    while (1)
     {
         check_for_bg_process();
         print_prompt();
 
-        char* lineptr = NULL;
+        char *lineptr = NULL;
         size_t readline;
         size_t len;
         int i = 0;
@@ -19,21 +18,20 @@ int main()
 
         lineptr[readline - 1] = '\0';
 
-        char* commtoken;
+        char *commtoken;
         commtoken = strtok(lineptr, ";");
         comm[i] = commtoken;
 
-        while( commtoken != NULL ) 
+        while (commtoken != NULL)
         {
             i++;
             commtoken = strtok(NULL, ";");
             comm[i] = commtoken;
         }
 
-        for( int j = 0; j < i; j++)
+        for (int j = 0; j < i; j++)
         {
             tokenise(comm[j]);
         }
-            
     }
 }

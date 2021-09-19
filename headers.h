@@ -8,10 +8,10 @@
 #include <sys/stat.h>
 #include <sys/dir.h>
 #include <sys/wait.h>
-#include <pwd.h> 
-#include <grp.h> 
-#include <time.h> 
-#include <locale.h> 
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
+#include <locale.h>
 
 #define MAX_LENGTH 1024
 
@@ -19,12 +19,12 @@
 #define __HEADER_H
 
 void print_prompt();
-void tokenise(char* command);
-void echo_execution(char** arg, int num);
-void cd_execution(char** arg, int num);
+void tokenise(char *command);
+void echo_execution(char **arg, int num);
+void cd_execution(char **arg, int num);
 void pwd_execution();
-void ls_execution(char** arg, int num);
-void identify_command(char** arg, int num);
+void ls_execution(char **arg, int num);
+void identify_command(char **arg, int num);
 void background_execution(char **arg, int num);
 void pinfo_execution(char **arg, int num);
 void exit_execution();
@@ -32,8 +32,8 @@ void check_for_bg_process();
 
 char invokedir[1024];
 char prevdir[1024];
-char* comm[64];
-char* argument[64];
+char *comm[64];
+char *argument[64];
 int a;
 struct back
 {

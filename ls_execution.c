@@ -34,13 +34,12 @@ void ls_execution(char **arg, int num)
         strcpy(path[0], ".");
         num_path = 1;
     }
-    
+
     for (int num_dirpath = 0; num_dirpath < num_path; num_dirpath++)
     {
         if (lsa == 0 && lsl == 0)
         {
-            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
-            // return;
+
             DIR *mydir;
             struct stat reqstat;
             struct dirent *myfile;
@@ -57,8 +56,6 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[num_dirpath][h];
                 }
                 respath[dist + h - 1] = '\0';
-                // printf("|%s|\n", respath);
-                // return;
             }
             mydir = opendir(respath);
             if (mydir == NULL)
@@ -76,7 +73,7 @@ void ls_execution(char **arg, int num)
             }
             else
             {
-                if(num_path != 1)
+                if (num_path != 1)
                 {
                     printf("%s:\n", path[num_dirpath]);
                 }
@@ -85,9 +82,9 @@ void ls_execution(char **arg, int num)
                     strcpy(buf, respath);
                     strcat(buf, "/");
                     strcat(buf, myfile->d_name);
-                    // sprintf(buf, "%s/%s", respath, myfile->d_name);
+
                     stat(buf, &reqstat);
-                    // printf("%zu", reqstat.st_size);
+
                     if (myfile->d_name[0] != '.')
                     {
                         printf("%s\n", myfile->d_name);
@@ -98,9 +95,7 @@ void ls_execution(char **arg, int num)
         }
         if (lsa == 0 && lsl == 1)
         {
-            // return;
-            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
-            // return;
+
             DIR *mydir;
             struct stat reqstat;
             struct dirent *myfile;
@@ -108,7 +103,7 @@ void ls_execution(char **arg, int num)
             char buf[1024];
             if (path[num_dirpath][0] == '~')
             {
-                // printf("yyyyyyyyyyyyyyyyyyyyy\n");
+
                 int h = 1;
                 strcpy(respath, invokedir);
                 strcat(respath, "/");
@@ -118,8 +113,6 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[num_dirpath][h];
                 }
                 respath[dist + h - 1] = '\0';
-                // printf("|%s|\n", respath);
-                // return;
             }
             mydir = opendir(respath);
             if (mydir == NULL)
@@ -130,7 +123,7 @@ void ls_execution(char **arg, int num)
                 {
                     struct tm filetime;
                     char dateof[100];
-                    // printf("%s\n", respath);
+
                     char permissions[11];
                     if (reqstat.st_mode & S_ISDIR(reqstat.st_mode))
                     {
@@ -226,7 +219,7 @@ void ls_execution(char **arg, int num)
             }
             else
             {
-                if(num_path != 1)
+                if (num_path != 1)
                 {
                     printf("%s:\n", path[num_dirpath]);
                 }
@@ -240,12 +233,12 @@ void ls_execution(char **arg, int num)
                 totdir = opendir(totrespath);
                 while ((totmyfile = readdir(totdir)) != NULL)
                 {
-                    // return;
+
                     strcpy(totbuf, totrespath);
                     strcat(totbuf, "/");
                     strcat(totbuf, totmyfile->d_name);
                     stat(totbuf, &totreqstat);
-                    if(totmyfile->d_name[0] != '.')
+                    if (totmyfile->d_name[0] != '.')
                     {
                         totbytes = totbytes + totreqstat.st_blocks;
                     }
@@ -259,9 +252,9 @@ void ls_execution(char **arg, int num)
                     strcpy(buf, respath);
                     strcat(buf, "/");
                     strcat(buf, myfile->d_name);
-                    // sprintf(buf, "%s/%s", respath, myfile->d_name);
+
                     stat(buf, &reqstat);
-                    // printf("%zu", reqstat.st_size);
+
                     char permissions[11];
                     if (reqstat.st_mode & S_ISDIR(reqstat.st_mode))
                     {
@@ -349,18 +342,16 @@ void ls_execution(char **arg, int num)
                     localtime_r(&reqstat.st_mtime, &filetime);
                     strftime(dateof, sizeof(dateof), "%b %d %Y %H:%M", &filetime);
 
-                    if(myfile->d_name[0] != '.')
+                    if (myfile->d_name[0] != '.')
                     {
                         printf("%s\t%ld\t%s\t%s\t%ld\t\t%s\t%s\n", permissions, reqstat.st_nlink, passown->pw_name, grfile->gr_name, reqstat.st_size, dateof, myfile->d_name);
                     }
                 }
-                    // return;
             }
         }
         if (lsa == 1 && lsl == 0)
         {
-            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
-            // return;
+
             DIR *mydir;
             struct stat reqstat;
             struct dirent *myfile;
@@ -377,8 +368,6 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[num_dirpath][h];
                 }
                 respath[dist + h - 1] = '\0';
-                // printf("|%s|\n", respath);
-                // return;
             }
             mydir = opendir(respath);
             if (mydir == NULL)
@@ -396,7 +385,7 @@ void ls_execution(char **arg, int num)
             }
             else
             {
-                if(num_path != 1)
+                if (num_path != 1)
                 {
                     printf("%s:\n", path[num_dirpath]);
                 }
@@ -405,22 +394,17 @@ void ls_execution(char **arg, int num)
                     strcpy(buf, respath);
                     strcat(buf, "/");
                     strcat(buf, myfile->d_name);
-                    // sprintf(buf, "%s/%s", respath, myfile->d_name);
+
                     stat(buf, &reqstat);
-                    // printf("%zu", reqstat.st_size);
-                    // if(myfile->d_name[0] != '.')
-                    // {
+
                     printf("%s\n", myfile->d_name);
-                    // }
                 }
             }
             closedir(mydir);
         }
         if (lsa == 1 && lsl == 1)
         {
-            // return;
-            // printf("bbaaaaaaaaaaaaaaaaaaaa\n");
-            // return;
+
             DIR *mydir;
             struct stat reqstat;
             struct dirent *myfile;
@@ -428,7 +412,7 @@ void ls_execution(char **arg, int num)
             char buf[1024];
             if (path[num_dirpath][0] == '~')
             {
-                // printf("yyyyyyyyyyyyyyyyyyyyy\n");
+
                 int h = 1;
                 strcpy(respath, invokedir);
                 strcat(respath, "/");
@@ -438,8 +422,6 @@ void ls_execution(char **arg, int num)
                     respath[dist + h - 1] = path[num_dirpath][h];
                 }
                 respath[dist + h - 1] = '\0';
-                // printf("|%s|\n", respath);
-                // return;
             }
             mydir = opendir(respath);
             if (mydir == NULL)
@@ -450,7 +432,7 @@ void ls_execution(char **arg, int num)
                 {
                     struct tm filetime;
                     char dateof[100];
-                    // printf("%s\n", respath);
+
                     char permissions[11];
                     if (reqstat.st_mode & S_ISDIR(reqstat.st_mode))
                     {
@@ -546,7 +528,7 @@ void ls_execution(char **arg, int num)
             }
             else
             {
-                if(num_path != 1)
+                if (num_path != 1)
                 {
                     printf("%s:\n", path[num_dirpath]);
                 }
@@ -560,15 +542,13 @@ void ls_execution(char **arg, int num)
                 totdir = opendir(totrespath);
                 while ((totmyfile = readdir(totdir)) != NULL)
                 {
-                    // return;
+
                     strcpy(totbuf, totrespath);
                     strcat(totbuf, "/");
                     strcat(totbuf, totmyfile->d_name);
                     stat(totbuf, &totreqstat);
-                    // if(totmyfile->d_name[0] != '.')
-                    // {
+
                     totbytes = totbytes + totreqstat.st_blocks;
-                    // }
                 }
                 totbytes = totbytes / 2;
                 printf("total %lld\n", totbytes);
@@ -579,9 +559,9 @@ void ls_execution(char **arg, int num)
                     strcpy(buf, respath);
                     strcat(buf, "/");
                     strcat(buf, myfile->d_name);
-                    // sprintf(buf, "%s/%s", respath, myfile->d_name);
+
                     stat(buf, &reqstat);
-                    // printf("%zu", reqstat.st_size);
+
                     char permissions[11];
                     if (reqstat.st_mode & S_ISDIR(reqstat.st_mode))
                     {
@@ -669,16 +649,13 @@ void ls_execution(char **arg, int num)
                     localtime_r(&reqstat.st_mtime, &filetime);
                     strftime(dateof, sizeof(dateof), "%b %d %Y %H:%M", &filetime);
 
-                    // if(myfile->d_name[0] != '.')
-                    // {
                     printf("%s\t%ld\t%s\t%s\t%ld\t\t%s\t%s\n", permissions, reqstat.st_nlink, passown->pw_name, grfile->gr_name, reqstat.st_size, dateof, myfile->d_name);
                 }
             }
         }
-        if(num_path != 1)
+        if (num_path != 1)
         {
             printf("\n");
         }
     }
-    // }
 }

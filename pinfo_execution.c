@@ -20,15 +20,14 @@ void pinfo_execution(char **arg, int num)
 
     process = fopen(processpath, "r");
 
-    if(process == NULL)
+    if (process == NULL)
     {
         perror("Incorrect pid");
     }
     else
     {
-        // printf("aaaaaaaaaaaaaaaaaghuerghrhg4ehgihf\n");
-        // return;
-        char* fileline;// = malloc(sizeof(char)*1024);
+
+        char *fileline;
         char status[1024];
         char size[1024];
 
@@ -36,55 +35,50 @@ void pinfo_execution(char **arg, int num)
 
         long t = 0, x;
 
-        // x = getline(&fileline, &t, process);
-        // return;
-        while(getline(&fileline, &t, process) != -1)
+        while (getline(&fileline, &t, process) != -1)
         {
-            // fileline[x - 1] = '\0';
-            // printf("%s\n", fileline);
-            // continue;
-            if(strncmp(fileline, "State", 5) == 0)
+
+            if (strncmp(fileline, "State", 5) == 0)
             {
                 int l;
-                for(l = 0; fileline[l + 7] != '\0'; l++)
+                for (l = 0; fileline[l + 7] != '\0'; l++)
                 {
                     status[l] = fileline[l + 7];
                 }
                 status[l - 1] = '\0';
             }
-            if(strncmp(fileline, "VmSize", 6) == 0)
+            if (strncmp(fileline, "VmSize", 6) == 0)
             {
                 int l;
-                for(l = 0; fileline[l + 8] != '\0'; l++)
+                for (l = 0; fileline[l + 8] != '\0'; l++)
                 {
                     size[l] = fileline[l + 8];
                 }
                 size[l - 1] = '\0';
             }
-            // x = getline(&fileline, &t, process);
         }
-        // return;
+
         int backprocess = 0;
 
         struct back *curr = present;
-        
-        if(curr != NULL)
+
+        if (curr != NULL)
         {
-            while(curr->backpid != pinfopid && curr != NULL)
+            while (curr->backpid != pinfopid && curr != NULL)
             {
                 curr = curr->next;
             }
-            if(curr != NULL)
+            if (curr != NULL)
             {
                 backprocess = 1;
             }
         }
 
-        if(backprocess == 0)
+        if (backprocess == 0)
         {
             printf("Process Status -- %s+\n", status);
         }
-        else if(backprocess == 1)
+        else if (backprocess == 1)
         {
             printf("Process Status -- %s\n", status);
         }
@@ -97,7 +91,7 @@ void pinfo_execution(char **arg, int num)
 
         int a = readlink(processpath, filelines, 1024);
 
-        if(a < 0)
+        if (a < 0)
         {
             perror("Executable file not found");
         }
@@ -105,8 +99,6 @@ void pinfo_execution(char **arg, int num)
         {
             filelines[a] = '\0';
             printf("Executable path -- %s\n", filelines);
-            // printf("%d\n", present->backpid);
         }
-        // free(fileline);
     }
 }
