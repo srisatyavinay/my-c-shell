@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/dir.h>
+#include <sys/wait.h>
 #include <pwd.h> 
 #include <grp.h> 
 #include <time.h> 
@@ -23,17 +24,24 @@ void echo_execution(char** arg, int num);
 void cd_execution(char** arg, int num);
 void pwd_execution();
 void ls_execution(char** arg, int num);
-
-
+void identify_command(char** arg, int num);
+void history_execution(char **arg, int num);
+void background_execution(char **arg, int num);
+void pinfo_execution(char **arg, int num);
 
 char invokedir[1024];
 char prevdir[1024];
-// extern char* workingdir;
 char* comm[64];
 char* argument[64];
 int a;
-// extern char* username;
-// extern char* systemname;
-// char* workingdir;
+struct back
+{
+    char backname[1024];
+    int backpid;
+    struct back *next;
+};
+
+struct back *first;
+struct back *present;
 
 #endif
