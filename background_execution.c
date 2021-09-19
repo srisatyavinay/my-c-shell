@@ -9,13 +9,10 @@ void background_execution(char **arg, int num)
         backproc = 1;
         arg[num - 1] = NULL;
     }
+
     int forkret = fork();
 
-    if (forkret < 0)
-    {
-        perror("Error while forking");
-    }
-    else if (forkret == 0)
+    if (forkret == 0)
     {
 
         if (backproc == 1)
@@ -31,6 +28,10 @@ void background_execution(char **arg, int num)
             exit(1);
         }
     }
+    else if (forkret < 0)
+    {
+        perror("Error while forking");
+    }
     else
     {
         int val;
@@ -45,7 +46,6 @@ void background_execution(char **arg, int num)
             strcpy(newback->backname, arg[0]);
             newback->backpid = forkret;
             newback->next = present;
-
             present = newback;
         }
     }

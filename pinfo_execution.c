@@ -37,16 +37,6 @@ void pinfo_execution(char **arg, int num)
 
         while (getline(&fileline, &t, process) != -1)
         {
-
-            if (strncmp(fileline, "State", 5) == 0)
-            {
-                int l;
-                for (l = 0; fileline[l + 7] != '\0'; l++)
-                {
-                    status[l] = fileline[l + 7];
-                }
-                status[l - 1] = '\0';
-            }
             if (strncmp(fileline, "VmSize", 6) == 0)
             {
                 int l;
@@ -55,6 +45,15 @@ void pinfo_execution(char **arg, int num)
                     size[l] = fileline[l + 8];
                 }
                 size[l - 1] = '\0';
+            }
+            if (strncmp(fileline, "State", 5) == 0)
+            {
+                int l;
+                for (l = 0; fileline[l + 7] != '\0'; l++)
+                {
+                    status[l] = fileline[l + 7];
+                }
+                status[l - 1] = '\0';
             }
         }
 
