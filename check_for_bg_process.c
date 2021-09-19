@@ -25,8 +25,9 @@ void check_for_bg_process()
                 {
                     if (curr != NULL && curr->backpid == processid)
                     {
+                        int exitstatus = WIFEXITED(processstatus);
                         present = present->next;
-                        if (WIFEXITED(processstatus))
+                        if (exitstatus)
                         {
                             fprintf(stderr, "%s with pid %d exited normally\n", previous->backname, previous->backpid);
                         }
@@ -45,8 +46,9 @@ void check_for_bg_process()
                         }
                         if (curr != NULL)
                         {
+                            int exitstatus = WIFEXITED(processstatus);
                             previous->next = curr->next;
-                            if (WIFEXITED(processstatus))
+                            if (exitstatus)
                             {
                                 fprintf(stderr, "%s with pid %d exited normally\n", curr->backname, curr->backpid);
                             }
@@ -57,6 +59,10 @@ void check_for_bg_process()
                             free(curr);
                         }
                     }
+                }
+                else
+                {
+                    return;
                 }
             }
         }
