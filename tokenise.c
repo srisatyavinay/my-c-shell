@@ -31,8 +31,14 @@ void identify_command(char **arg, int num)
     }
     else if (strcmp(arg[0], "pwd") == 0)
     {
-
-        pwd_execution();
+        if(num == 1)
+        {
+            pwd_execution();
+        }
+        else
+        {
+            printf("Error: pwd: too many arguments\n");
+        }
     }
     else if (strcmp(arg[0], "ls") == 0)
     {
