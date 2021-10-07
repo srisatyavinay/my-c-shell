@@ -4,6 +4,7 @@ int redirection(int redirect, int num_args)
 {
     if (redirect == 1 || redirect == 3)
     {
+        // printf("1111111111111111111111\n");
         for(int i = 0; i < num_args - 1; i++)
         {
             if(strcmp(argument[i], "<") == 0)
@@ -26,12 +27,14 @@ int redirection(int redirect, int num_args)
                 {
                     strcpy(argument[j], argument[j + 2]);
                 }
+                num_args = num_args - 2;
                 break;
             }
         }
     }
     if (redirect == 2 || redirect == 3)
     {
+        // printf("1111111111111111111111\n");
         for(int i = 0; i < num_args - 1; i++)
         {
             if(strcmp(argument[i], ">") == 0)
@@ -52,6 +55,7 @@ int redirection(int redirect, int num_args)
                 {
                     strcpy(argument[j], argument[j + 2]);
                 }
+                num_args = num_args - 2;
                 break;
             }
             if(strcmp(argument[i], ">>") == 0)
@@ -72,6 +76,7 @@ int redirection(int redirect, int num_args)
                 {
                     strcpy(argument[j], argument[j + 2]);
                 }
+                num_args = num_args - 2;
                 break;
             }
             
