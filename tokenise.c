@@ -56,6 +56,10 @@ void tokenise(char *command)
         // printf("------------------------\n");
         // printf("%d", num_args);
     }
+    if(num_args < 63)
+    {
+        argument[num_args] = NULL;
+    }
 
     identify_command(argument, num_args);
 }
