@@ -3,15 +3,15 @@
 void tokenise(char *command)
 {
     int redirect = 0;
-    if(strstr(command, "<"))
+    if(strstr(command, ">") == NULL && strstr(command, "<") != NULL)
     {
         redirect = 1;
     }
-    else if(strstr(command, ">"))
+    else if(strstr(command, ">") != NULL && strstr(command, "<") == NULL)
     {
         redirect = 2;
     }
-    else if(strstr(command, ">") && strstr(command, "<"))
+    else if(strstr(command, ">") != NULL && strstr(command, "<") != NULL)
     {
         redirect = 3;
     }
@@ -56,6 +56,7 @@ void tokenise(char *command)
         // printf("------------------------\n");
         // printf("%d", num_args);
     }
+    // printf("lll---------------%d----------------------lll", num_args);
     if(num_args < 63)
     {
         argument[num_args] = NULL;
