@@ -4,6 +4,8 @@ int main()
 {
     present = NULL;
     getcwd(invokedir, MAX_LENGTH);
+    input = dup(STDIN_FILENO);
+    output = dup(STDOUT_FILENO);
     while (1)
     {
         print_prompt();

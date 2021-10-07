@@ -2,6 +2,19 @@
 
 void tokenise(char *command)
 {
+    int redirect = 0;
+    if(strstr(command, "<"))
+    {
+        redirect = 1;
+    }
+    else if(strstr(command, ">"))
+    {
+        redirect = 2;
+    }
+    else if(strstr(command, ">") && strstr(command, "<"))
+    {
+        redirect = 3;
+    }
     char *argtoken;
     int num_args = 0;
 
@@ -14,6 +27,34 @@ void tokenise(char *command)
         num_args++;
         argtoken = strtok(NULL, " \t\v");
         argument[num_args] = argtoken;
+    }
+
+    if(redirect != 0)
+    {
+        int caseerr = redirection(redirect, num_args);
+        if(caseerr == 1)
+        {
+            return;
+        }
+        if(redirect == 1)
+        {
+            num_args = num_args - 2;
+        }
+        if(redirect == 2)
+        {
+            num_args = num_args - 2;
+        }
+        if(redirect == 3)
+        {
+            num_args = num_args - 4;
+        }
+        // printf("------------------------\n");
+        // for(int i = 0; i < num_args; i++)
+        // {
+            // printf("%s\n", argument[i]);            
+        // }
+        // printf("------------------------\n");
+        // printf("%d", num_args);
     }
 
     identify_command(argument, num_args);
@@ -65,4 +106,6 @@ void identify_command(char **arg, int num)
     {
         background_execution(arg, num);
     }
+    dup2(input, STDIN_FILENO);
+    dup2(output, STDOUT_FILENO);
 }

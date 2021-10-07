@@ -12,6 +12,7 @@
 #include <grp.h>
 #include <time.h>
 #include <locale.h>
+#include <fcntl.h>
 
 #define MAX_LENGTH 1024
 
@@ -29,7 +30,9 @@ void background_execution(char **arg, int num);
 void pinfo_execution(char **arg, int num);
 void exit_execution();
 void check_for_bg_process();
+int redirection(int redirect, int num_args);
 
+int input, output;
 char invokedir[1024];
 char prevdir[1024];
 char *comm[64];
