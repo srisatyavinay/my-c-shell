@@ -56,7 +56,7 @@ void background_execution(char **arg, int num)
             }
             else
             {
-                while(strcmp(arg[0], curr->backname) > 0)
+                while(strcmp(arg[0], curr->backname) >= 0)
                 {
                     prev = curr;
                     curr = curr->next;
