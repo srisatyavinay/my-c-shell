@@ -43,6 +43,14 @@ int main()
             }
         }
 
+        // struct back* more = present;
+
+        // while(more != NULL)
+        // {
+        //     printf("%s(%d) points to ", more->backname, more->jobnum);
+        //     more = more->next;
+        // }
+
         check_for_bg_process();
     }
 }

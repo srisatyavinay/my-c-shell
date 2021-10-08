@@ -44,24 +44,37 @@ void background_execution(char **arg, int num)
             printf("%d\n", forkret);
             struct back *newback = malloc(sizeof(struct back));
             struct back *prev = NULL;
+            struct back *curr = present;
             backnum++;
             strcpy(newback->backname, arg[0]);
             newback->backpid = forkret;
             newback->jobnum = backnum;
-            if(present == NULL)
+            if(curr == NULL)
             {
                 newback->next = NULL;
                 present = newback;
             }
             else
             {
-                while(strcmp(arg[0], present->backname) > 0)
+                while(strcmp(arg[0], curr->backname) > 0)
                 {
-                    prev = present;
-                    present = present->next;
+                    prev = curr;
+                    curr = curr->next;
+                    if(curr == NULL)
+                    {
+                        break;
+                    }
                 }
-                prev->next = newback;
-                newback->next = present;
+                if(prev != NULL)
+                {
+                    prev->next = newback;
+                    newback->next = curr;
+                }
+                else
+                {
+                    newback->next = curr;
+                    present = newback;
+                }
             }
             // newback->next = present;
             // present = newback;
