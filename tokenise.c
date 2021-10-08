@@ -24,7 +24,6 @@ void tokenise(char *command)
 
     while (argtoken != NULL)
     {
-
         num_args++;
         argtoken = strtok(NULL, " \t\v");
         argument[num_args] = argtoken;
@@ -32,11 +31,9 @@ void tokenise(char *command)
 
     if(redirect != 0)
     {
-        // int *numa = &num_args;
         int caseerr = redirection(redirect, num_args);
         if(caseerr == 1)
         {
-            // printf("aaaaaaaaaaaaa\n");
             return;
         }
         if(redirect == 1)
@@ -51,23 +48,25 @@ void tokenise(char *command)
         {
             num_args = num_args - 4;
         }
-        // printf("------------------------\n");
-        // for(int i = 0; i < num_args; i++)
-        // {
-            // printf("%s\n", argument[i]);            
-        // }
-        // printf("------------------------\n");
-        // printf("%d", num_args);
-        // num_args = *numa;
-        // printf("------%d-------", num_args);
+        if(num_args < 63)
+        {
+            argument[num_args] = NULL;
+        }
     }
-    // printf("lll---------------%d----------------------lll", num_args);
-    if(num_args < 63)
+    
+    for(int i = 0; i < num_args; i++)
     {
-        argument[num_args] = NULL;
+        if(strcmp(argument[i], "<") == 0 || strcmp(argument[i], ">") == 0 || strcmp(argument[i], ">>") == 0)
+        {
+            fprintf(stderr, "Syntax error");
+            return;
+        }
     }
 
     identify_command(argument, num_args);
+
+    dup2(input, STDIN_FILENO);
+    dup2(output, STDOUT_FILENO);
 }
 
 void identify_command(char **arg, int num)
@@ -116,6 +115,5 @@ void identify_command(char **arg, int num)
     {
         background_execution(arg, num);
     }
-    dup2(input, STDIN_FILENO);
-    dup2(output, STDOUT_FILENO);
+    
 }

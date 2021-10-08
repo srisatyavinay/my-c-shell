@@ -33,7 +33,14 @@ int main()
 
         for (int j = 0; j < i; j++)
         {
-            tokenise(comm[j]);
+            if(strstr(comm[j], "|") != NULL)
+            {
+                pipe_execution(comm[j]);
+            }
+            else
+            {
+                tokenise(comm[j]);
+            }
         }
     }
 }
