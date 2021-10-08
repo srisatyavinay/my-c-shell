@@ -106,14 +106,16 @@ void identify_command(char **arg, int num)
             identify_command(arg + 2, num - 2);
         }
     }
-
     else if (strcmp(arg[0], "exit") == 0)
     {
         exit_execution();
+    }
+    else if (strcmp(arg[0], "jobs") == 0)
+    {
+        jobs_execution(arg, num);
     }
     else
     {
         background_execution(arg, num);
     }
-    
 }
