@@ -2,6 +2,7 @@
 
 int main()
 {
+    backnum = 0;
     present = NULL;
     getcwd(invokedir, MAX_LENGTH);
     input = dup(STDIN_FILENO);
@@ -9,7 +10,6 @@ int main()
     while (1)
     {
         print_prompt();
-        check_for_bg_process();
 
         char *lineptr = NULL;
         size_t readline;
@@ -42,5 +42,7 @@ int main()
                 tokenise(comm[j]);
             }
         }
+
+        check_for_bg_process();
     }
 }

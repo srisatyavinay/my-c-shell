@@ -32,6 +32,7 @@ void exit_execution();
 void check_for_bg_process();
 int redirection(int redirect, int num_args);
 void pipe_execution(char *pipecomm);
+void jobs_execution(char **arg, int num);
 
 int input, output;
 char invokedir[1024];
@@ -40,10 +41,12 @@ char *comm[64];
 char *argument[64];
 char *pargument[64];
 int a;
+int backnum;
 struct back
 {
     int backpid;
     char backname[1024];
+    int jobnum;
     struct back *next;
 };
 
