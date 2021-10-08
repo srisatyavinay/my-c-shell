@@ -2,84 +2,65 @@
 
 int redirection(int redirect, int num_args)
 {
-    if (redirect == 1 || redirect == 3)
+    for(int l = 0; l < num_args - 1; l++)
     {
-        // printf("1111111111111111111111\n");
-        for(int i = 0; i < num_args - 1; i++)
+        if(strcmp(argument[l], "<") == 0)
         {
-            if(strcmp(argument[i], "<") == 0)
-            {
-                // printf("abcd\n");
-                int x = open(argument[i + 1], O_RDONLY);
+            int x = open(argument[l + 1], O_RDONLY);
 
-                if(x < 0)
-                {
-                    perror("File error");
-                    return 1;
-                }
-                else
-                {
-                    // printf("abcdefgh\n");
-                    dup2(x, STDIN_FILENO);
-                    close(x);
-                }
-                for(int j = i; j < num_args - 3; j++)
-                {
-                    strcpy(argument[j], argument[j + 2]);
-                }
-                num_args = num_args - 2;
-                break;
+            if(x < 0)
+            {
+                perror("File error");
+                return 1;
+            }
+            else
+            {
+                // printf("abcdefgh\n");
+                dup2(x, STDIN_FILENO);
+                close(x);
+            }
+            for(int j = l; j < num_args - 3; j++)
+            {
+                strcpy(argument[j], argument[j + 2]);
             }
         }
-    }
-    if (redirect == 2 || redirect == 3)
-    {
-        // printf("1111111111111111111111\n");
-        for(int i = 0; i < num_args - 1; i++)
+        if(strcmp(argument[l], ">") == 0)
         {
-            if(strcmp(argument[i], ">") == 0)
-            {
-                int x = open(argument[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            int x = open(argument[l + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
-                if(x < 0)
-                {
-                    perror("File error");
-                    return 1;
-                }
-                else
-                {
-                    dup2(x, STDOUT_FILENO);
-                    close(x);
-                }
-                for(int j = i; j < num_args - 3; j++)
-                {
-                    strcpy(argument[j], argument[j + 2]);
-                }
-                num_args = num_args - 2;
-                break;
-            }
-            if(strcmp(argument[i], ">>") == 0)
+            if(x < 0)
             {
-                int x = open(argument[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-
-                if(x < 0)
-                {
-                    perror("File error");
-                    return 1;
-                }
-                else
-                {
-                    dup2(x, STDOUT_FILENO);
-                    close(x);
-                }
-                for(int j = i; j < num_args - 3; j++)
-                {
-                    strcpy(argument[j], argument[j + 2]);
-                }
-                num_args = num_args - 2;
-                break;
+                perror("File error");
+                return 1;
             }
-            
+            else
+            {
+                dup2(x, STDOUT_FILENO);
+                close(x);
+            }
+            for(int j = l; j < num_args - 3; j++)
+            {
+                strcpy(argument[j], argument[j + 2]);
+            }
+        }
+        if(strcmp(argument[l], ">>") == 0)
+        {
+            int x = open(argument[l + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+
+            if(x < 0)
+            {
+                perror("File error");
+                return 1;
+            }
+            else
+            {
+                dup2(x, STDOUT_FILENO);
+                close(x);
+            }
+            for(int j = l; j < num_args - 3; j++)
+            {
+                strcpy(argument[j], argument[j + 2]);
+            }
         }
     }
     return 0;

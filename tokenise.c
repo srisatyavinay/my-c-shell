@@ -11,8 +11,9 @@ void tokenise(char *command)
     {
         redirect = 2;
     }
-    else if(strstr(command, ">") != NULL && strstr(command, "<") != NULL)
+    if(strstr(command, ">") != NULL && strstr(command, "<") != NULL)
     {
+        // printf("aaaaaaaaaaaaa\n");
         redirect = 3;
     }
     char *argtoken;
@@ -31,9 +32,11 @@ void tokenise(char *command)
 
     if(redirect != 0)
     {
+        // int *numa = &num_args;
         int caseerr = redirection(redirect, num_args);
         if(caseerr == 1)
         {
+            // printf("aaaaaaaaaaaaa\n");
             return;
         }
         if(redirect == 1)
@@ -55,6 +58,8 @@ void tokenise(char *command)
         // }
         // printf("------------------------\n");
         // printf("%d", num_args);
+        // num_args = *numa;
+        // printf("------%d-------", num_args);
     }
     // printf("lll---------------%d----------------------lll", num_args);
     if(num_args < 63)
