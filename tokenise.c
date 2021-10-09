@@ -118,6 +118,14 @@ void identify_command(char **arg, int num)
     {
         sig_execution(arg, num);
     }
+    else if (strcmp(arg[0], "fg") == 0)
+    {
+        fg_execution(arg, num);
+    }
+    else if (strcmp(arg[0], "bg") == 0)
+    {
+        bg_execution(arg, num);
+    }
     else
     {
         background_execution(arg, num);

@@ -35,6 +35,8 @@ int redirection(int redirect, int num_args);
 void pipe_execution(char *pipecomm);
 void jobs_execution(char **arg, int num);
 void sig_execution(char **arg, int num);
+void fg_execution(char **arg, int num);
+void bg_execution(char **arg, int num);
 
 int input, output;
 char invokedir[1024];
