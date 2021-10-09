@@ -37,7 +37,7 @@ void background_execution(char **arg, int num)
         int val;
         if (backproc != 1)
         {
-            fprocpid = getpid();
+            fprocpid = forkret;
             fproc->fpid = fprocpid;
             strcpy(fproc->fname, arg[0]);
             waitpid(forkret, &val, WUNTRACED);

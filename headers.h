@@ -37,6 +37,8 @@ void jobs_execution(char **arg, int num);
 void sig_execution(char **arg, int num);
 void fg_execution(char **arg, int num);
 void bg_execution(char **arg, int num);
+void ctrl_c_execution(int signum);
+void ctrl_z_execution(int signum);
 
 int input, output;
 char invokedir[1024];
@@ -48,6 +50,8 @@ int a;
 int backnum;
 struct fore *fproc;
 int fprocpid;
+int shellpid;
+
 struct back
 {
     int backpid;
