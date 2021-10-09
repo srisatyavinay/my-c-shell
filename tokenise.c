@@ -114,6 +114,10 @@ void identify_command(char **arg, int num)
     {
         jobs_execution(arg, num);
     }
+    else if (strcmp(arg[0], "sig") == 0)
+    {
+        sig_execution(arg, num);
+    }
     else
     {
         background_execution(arg, num);

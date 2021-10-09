@@ -12,6 +12,7 @@
 #include <grp.h>
 #include <time.h>
 #include <locale.h>
+#include <signal.h>
 #include <fcntl.h>
 
 #define MAX_LENGTH 1024
@@ -33,6 +34,7 @@ void check_for_bg_process();
 int redirection(int redirect, int num_args);
 void pipe_execution(char *pipecomm);
 void jobs_execution(char **arg, int num);
+void sig_execution(char **arg, int num);
 
 int input, output;
 char invokedir[1024];
