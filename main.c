@@ -26,6 +26,7 @@ int main()
 
         if(readline == -1)
         {
+            printf("\n");
             exit(1);
         }
 
