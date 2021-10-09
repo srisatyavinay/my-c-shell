@@ -46,12 +46,20 @@ char *argument[64];
 char *pargument[64];
 int a;
 int backnum;
+struct fore *fproc;
+int fprocpid;
 struct back
 {
     int backpid;
     char backname[1024];
     int jobnum;
     struct back *next;
+};
+
+struct fore
+{
+    int fpid;
+    char fname[1024];
 };
 
 struct back *present;
