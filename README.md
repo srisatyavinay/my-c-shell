@@ -1,4 +1,4 @@
-# OSN Assignment - 2
+# OSN Assignment - 3
 
 This is a working C shell that would mimic a bash shell which supports colon seperated commands.
 
@@ -18,6 +18,7 @@ To stop the shell use the following command
 ```bash
 exit
 ```
+You can also click **`ctrl` + `D`**
 
 ## Files used
 
@@ -110,9 +111,72 @@ void exit_execution()
 ```
 When `exit` command is used the shell stops. This is implemented by this function.
 
+### redirection.c
+
+```c
+int redirection(int redirect, int num_args)
+```
+
+This function does the redirection part when `>`, `<`, `>>` are used.
+It uses `dup`, `dup2` functions to accomplish this.
+
+### pipe_execution.c
+
+```c
+void pipe_execution(char *pipecommand)
+```
+This function does the piping part when `|` is used. It uses `pipe` function to achieve this.
+
+### jobs_execution.c
+
+```c
+void jobs_execution(char **arg, int num)
+```
+This function executes the `jobs` command. It gives the details of all the running and stopped processes and it also facilitates the usage of two flags `-s` to display only stopped processes and `-r` to display only running processes.
+It searches for the status in `/proc` folder.
+
+### sig_execution.c
+
+```c
+void sig_execution(char **arg, int num)
+```
+This function does the execution of `sig` command where we specify the job number and the signal to pass and it passes the given signal to the specified process.
+This uses `kill` function.
+
+### fg_execution.c
+
+```c
+void fg_execution(char **arg, int num)
+```
+This function executes `fg` command.
+It takes a job number and brings to the foreground and makes it running if it is stopped.
+This uses `kill` function.
+
+### bg_execution.c
+
+```c
+void bg_execution(char **arg, int num)
+```
+This function executes `bg` command.
+It takes a job number and makes it running if it is stopped.
+This uses `kill` function.
+
+### signal_handling.c
+
+```c
+void ctrl_c_execution(int signum)
+```
+This function interrupts any currently running foreground job, by sending it the SIGINT signal whenever `ctrl` + `C` is pressed.
+
+```c
+void ctrl_z_execution(int signum)
+```
+This function pushes any currently running foreground job into the background, and change its state from running to stopped whenever `ctrl` + `D` is pressed.
+
 ## General Assumptions
 
 - At max there can be 64 semi-colon seperated commands in a line.
 - Each individual command can have 64 arguments and each one of them can be at max 1024 characters long.
 - All the paths given must be less than 1024 characters.
 - The hostname, system name, current working directory path is less than 1024 characters.
+- In a command involving piping there can be at max 64 piped commands.
