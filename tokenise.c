@@ -3,17 +3,16 @@
 void tokenise(char *command)
 {
     int redirect = 0;
-    if(strstr(command, ">") == NULL && strstr(command, "<") != NULL)
+    if (strstr(command, ">") == NULL && strstr(command, "<") != NULL)
     {
         redirect = 1;
     }
-    else if(strstr(command, ">") != NULL && strstr(command, "<") == NULL)
+    else if (strstr(command, ">") != NULL && strstr(command, "<") == NULL)
     {
         redirect = 2;
     }
-    if(strstr(command, ">") != NULL && strstr(command, "<") != NULL)
+    if (strstr(command, ">") != NULL && strstr(command, "<") != NULL)
     {
-        // printf("aaaaaaaaaaaaa\n");
         redirect = 3;
     }
     char *argtoken;
@@ -29,34 +28,34 @@ void tokenise(char *command)
         argument[num_args] = argtoken;
     }
 
-    if(redirect != 0)
+    if (redirect != 0)
     {
         int caseerr = redirection(redirect, num_args);
-        if(caseerr == 1)
+        if (caseerr == 1)
         {
             return;
         }
-        if(redirect == 1)
+        if (redirect == 1)
         {
             num_args = num_args - 2;
         }
-        if(redirect == 2)
+        if (redirect == 2)
         {
             num_args = num_args - 2;
         }
-        if(redirect == 3)
+        if (redirect == 3)
         {
             num_args = num_args - 4;
         }
-        if(num_args < 63)
+        if (num_args < 63)
         {
             argument[num_args] = NULL;
         }
     }
-    
-    for(int i = 0; i < num_args; i++)
+
+    for (int i = 0; i < num_args; i++)
     {
-        if(strcmp(argument[i], "<") == 0 || strcmp(argument[i], ">") == 0 || strcmp(argument[i], ">>") == 0)
+        if (strcmp(argument[i], "<") == 0 || strcmp(argument[i], ">") == 0 || strcmp(argument[i], ">>") == 0)
         {
             fprintf(stderr, "Syntax error");
             return;
@@ -81,7 +80,7 @@ void identify_command(char **arg, int num)
     }
     else if (strcmp(arg[0], "pwd") == 0)
     {
-        if(num == 1)
+        if (num == 1)
         {
             pwd_execution();
         }

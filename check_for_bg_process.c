@@ -39,7 +39,7 @@ void check_for_bg_process()
                     }
                     else
                     {
-                        for (;curr != NULL && curr->backpid != processid;)
+                        for (; curr != NULL && curr->backpid != processid;)
                         {
                             previous = curr;
                             curr = curr->next;

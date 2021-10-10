@@ -2,7 +2,7 @@
 
 void sig_execution(char **arg, int num)
 {
-    if(num == 3)
+    if (num == 3)
     {
         int njob = atoi(arg[1]);
         int sig = atoi(arg[2]);
@@ -12,23 +12,23 @@ void sig_execution(char **arg, int num)
 
         struct back *jobptr = present;
 
-        while(jobptr != NULL)
+        while (jobptr != NULL)
         {
-            if(jobptr->jobnum == njob)
+            if (jobptr->jobnum == njob)
             {
                 found = 1;
                 jpid = jobptr->backpid;
                 break;
             }
         }
-        if(found == 1)
+        if (found == 1)
         {
             kill(jpid, sig);
         }
         else
         {
             fprintf(stderr, "Enter valid job number");
-        } 
+        }
     }
     else
     {

@@ -12,10 +12,6 @@ void background_execution(char **arg, int num)
 
     int forkret = fork();
 
-    // fprocpid = forkret;
-    // fproc->fpid = fprocpid;
-    // strcpy(fproc->fname, arg[0]);
-
     if (forkret == 0)
     {
 
@@ -56,23 +52,23 @@ void background_execution(char **arg, int num)
             strcpy(newback->backname, arg[0]);
             newback->backpid = forkret;
             newback->jobnum = backnum;
-            if(curr == NULL)
+            if (curr == NULL)
             {
                 newback->next = NULL;
                 present = newback;
             }
             else
             {
-                while(strcmp(arg[0], curr->backname) >= 0)
+                while (strcmp(arg[0], curr->backname) >= 0)
                 {
                     prev = curr;
                     curr = curr->next;
-                    if(curr == NULL)
+                    if (curr == NULL)
                     {
                         break;
                     }
                 }
-                if(prev != NULL)
+                if (prev != NULL)
                 {
                     prev->next = newback;
                     newback->next = curr;
@@ -83,8 +79,6 @@ void background_execution(char **arg, int num)
                     present = newback;
                 }
             }
-            // newback->next = present;
-            // present = newback;
         }
     }
 }

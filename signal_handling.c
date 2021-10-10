@@ -3,9 +3,9 @@
 void ctrl_c_execution(int signum)
 {
     int ppid = getpid();
-    if(ppid == shellpid)
+    if (ppid == shellpid)
     {
-        if(fprocpid != -1)
+        if (fprocpid != -1)
         {
             kill(fprocpid, SIGINT);
         }
@@ -20,9 +20,9 @@ void ctrl_c_execution(int signum)
 void ctrl_z_execution(int signum)
 {
     int ppid = getpid();
-    if(ppid == shellpid)
+    if (ppid == shellpid)
     {
-        if(fprocpid != -1)
+        if (fprocpid != -1)
         {
             kill(fprocpid, SIGTTIN);
             kill(fprocpid, SIGTSTP);
@@ -33,23 +33,23 @@ void ctrl_z_execution(int signum)
             strcpy(newback->backname, fproc->fname);
             newback->backpid = fprocpid;
             newback->jobnum = backnum;
-            if(curr == NULL)
+            if (curr == NULL)
             {
                 newback->next = NULL;
                 present = newback;
             }
             else
             {
-                while(strcmp(fproc->fname, curr->backname) >= 0)
+                while (strcmp(fproc->fname, curr->backname) >= 0)
                 {
                     prev = curr;
                     curr = curr->next;
-                    if(curr == NULL)
+                    if (curr == NULL)
                     {
                         break;
                     }
                 }
-                if(prev != NULL)
+                if (prev != NULL)
                 {
                     prev->next = newback;
                     newback->next = curr;

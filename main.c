@@ -10,8 +10,10 @@ int main()
     input = dup(STDIN_FILENO);
     output = dup(STDOUT_FILENO);
     fproc = malloc(sizeof(struct fore));
+    
     signal(SIGINT, ctrl_c_execution);
     signal(SIGTSTP, ctrl_z_execution);
+
     while (1)
     {
         fprocpid = -1;
@@ -25,7 +27,7 @@ int main()
 
         readline = getdelim(&lineptr, &len, 10, stdin);
 
-        if(readline == -1)
+        if (readline == -1)
         {
             printf("\n");
             exit(1);
@@ -46,7 +48,7 @@ int main()
 
         for (int j = 0; j < i; j++)
         {
-            if(strstr(comm[j], "|") != NULL)
+            if (strstr(comm[j], "|") != NULL)
             {
                 pipe_execution(comm[j]);
             }
@@ -55,14 +57,6 @@ int main()
                 tokenise(comm[j]);
             }
         }
-
-        // struct back* more = present;
-
-        // while(more != NULL)
-        // {
-        //     printf("%s(%d) points to ", more->backname, more->jobnum);
-        //     more = more->next;
-        // }
 
         check_for_bg_process();
     }

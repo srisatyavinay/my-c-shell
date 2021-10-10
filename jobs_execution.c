@@ -20,11 +20,10 @@ void jobs_execution(char **arg, int num)
             js = 1;
         }
     }
-    // printf("------%d %d------\n", jr, js);
-    // return;
+
     struct back *point = present;
 
-    while(point != NULL)
+    while (point != NULL)
     {
         int pinfopid, bjob;
         char processpath[1024];
@@ -39,15 +38,12 @@ void jobs_execution(char **arg, int num)
         if (process == NULL)
         {
             perror("Error");
-            // return;
         }
         else
         {
             char *fileline;
             char status[20];
             char y;
-
-            // printf("pid -- %d\n", pinfopid);
 
             long t = 0, x;
 
@@ -56,7 +52,7 @@ void jobs_execution(char **arg, int num)
                 if (strncmp(fileline, "State", 5) == 0)
                 {
                     y = fileline[7];
-                    if(y == 'D' || y == 'S' || y == 'R')
+                    if (y == 'D' || y == 'S' || y == 'R')
                     {
                         strcpy(status, "Running");
                     }
@@ -68,16 +64,16 @@ void jobs_execution(char **arg, int num)
                 }
             }
             fclose(process);
-            if((jr == 1) && (js != 1))
+            if ((jr == 1) && (js != 1))
             {
-                if(strcmp(status, "Running") == 0)
+                if (strcmp(status, "Running") == 0)
                 {
                     printf("[%d] %s %s [%d]\n", bjob, status, point->backname, pinfopid);
                 }
             }
-            else if((jr != 1) && (js == 1))
+            else if ((jr != 1) && (js == 1))
             {
-                if(strcmp(status, "Stopped") == 0)
+                if (strcmp(status, "Stopped") == 0)
                 {
                     printf("[%d] %s %s [%d]\n", bjob, status, point->backname, pinfopid);
                 }

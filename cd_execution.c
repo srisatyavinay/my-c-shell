@@ -12,14 +12,14 @@ void cd_execution(char **arg, int num)
     }
     else if (num == 1)
     {
-        if(chdir(invokedir) < 0)
+        if (chdir(invokedir) < 0)
         {
             perror("Invalid path");
         }
     }
     else if (strcmp(arg[1], "~") == 0)
     {
-        if(chdir(invokedir) < 0)
+        if (chdir(invokedir) < 0)
         {
             perror("Invalid path");
         }
@@ -30,7 +30,7 @@ void cd_execution(char **arg, int num)
     }
     else if (strcmp(arg[1], "-") == 0)
     {
-        if(chdir(prevdir) < 0)
+        if (chdir(prevdir) < 0)
         {
             perror("Invalid path");
         }
@@ -55,14 +55,14 @@ void cd_execution(char **arg, int num)
         }
 
         newpath[strlen(invokedir) + k] = '\0';
-        if(chdir(newpath) < 0)
+        if (chdir(newpath) < 0)
         {
             perror("Invalid path");
         }
     }
     else
     {
-        if(chdir(arg[1]) < 0)
+        if (chdir(arg[1]) < 0)
         {
             perror("Invalid path");
         }

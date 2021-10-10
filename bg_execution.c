@@ -2,7 +2,7 @@
 
 void bg_execution(char **arg, int num)
 {
-    if(num == 2)
+    if (num == 2)
     {
         int njob = atoi(arg[1]);
         int jpid;
@@ -11,24 +11,23 @@ void bg_execution(char **arg, int num)
 
         struct back *jobptr = present;
 
-        while(jobptr != NULL)
+        while (jobptr != NULL)
         {
-            if(jobptr->jobnum == njob)
+            if (jobptr->jobnum == njob)
             {
                 found = 1;
                 jpid = jobptr->backpid;
                 break;
             }
         }
-        if(found == 1)
+        if (found == 1)
         {
-            // kill(jpid, SIGTTIN);
             kill(jpid, SIGCONT);
         }
         else
         {
             fprintf(stderr, "Enter valid job number");
-        } 
+        }
     }
     else
     {
