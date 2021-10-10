@@ -66,5 +66,5 @@ void ctrl_z_execution(int signum)
     {
         return;
     }
-    signal(SIGINT, ctrl_z_execution);
+    signal(SIGTSTP, ctrl_z_execution);
 }
