@@ -53,11 +53,11 @@ void fg_execution(char **arg, int num)
         }
         else
         {
-            fprintf(stderr, "Enter valid job number");
+            fprintf(stderr, "Enter valid job number\n");
         }
     }
     else
     {
-        fprintf(stderr, "jobs: Incorrect syntax");
+        fprintf(stderr, "jobs: Incorrect syntax\n");
     }
 }
