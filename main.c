@@ -9,6 +9,7 @@ int main()
     getcwd(invokedir, MAX_LENGTH);
     input = dup(STDIN_FILENO);
     output = dup(STDOUT_FILENO);
+    fproc = malloc(sizeof(struct fore));
     signal(SIGINT, ctrl_c_execution);
     signal(SIGTSTP, ctrl_z_execution);
     while (1)

@@ -12,6 +12,10 @@ void background_execution(char **arg, int num)
 
     int forkret = fork();
 
+    // fprocpid = forkret;
+    // fproc->fpid = fprocpid;
+    // strcpy(fproc->fname, arg[0]);
+
     if (forkret == 0)
     {
 
